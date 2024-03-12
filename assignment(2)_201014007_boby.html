@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<body onload="myFunction3()" id="demo1" onresize="onresize()">
+<head>
+    <style>
+        div {
+  border: 1px solid black;
+  width: 250px;
+  height: 100px;
+  overflow: scroll;
+}
+    </style>
+</head>
+<h1>_________________________________HTML DOM EVENTS______________________________________</h1>
+<p><h2>Mouse Event!!</h2> Test the text below!</p>
+<p id="myP" onmouseenter="enter()" onmouseleave="leave()" onmousedown="mouseDown()" ondblclick="double()" onmouseup="mouseUp()" onmousemove="move(event)" >
+    The <b>onmouseenter()</b> the cursor will change to pointer style.
+    The <b>onmouseleave()</b>the cursor will change to default style.
+    The <b>onmousemove()</b>When moved the mouse over the element left or right text size will change.
+    The <b>mouseDown()</b> function sets the color of this text to blue.
+    The <b>mouseUp()</b> function sets the color of this text to red.
+    The <b>ondbclick()</b>After double click 'Wooohhooo explore more!' will append here.<br><br>
+    <p id="demo"></p>
+</p>
+<h2>Keyboard Event!!</h2>
+<p>Write someting in the input field to test!</p><br>
+Key Down:  <input type="text" onkeydown="myFunction()"><br><br>
+Key Press:  <input type="text" onkeypress="myFunction1()"><br><br>
+Key up:  <input type="text" id="fname" onkeyup="myFunction2()">  this field will transform the Upper case to lowercase.<br>
+
+<h2>Frame/ Object Events!!</h2>
+The <b>onscroll</b> event occurs when an element's scrollbar is being scrolled. When scrolled the following div part, a corresponding message will be displayed below the content.<br>
+<p>Try the scrollbar in div.</p>
+<div onscroll="myFunction4()">In my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind ever since.
+<br><br>
+'Whenever you feel like criticizing anyone,' he told me, just remember that all the people in this world haven't had the advantages that you've had.'</div>
+
+<p id="demo2"></p>
+The <b>onload()</b> loaded the whole page at the very beginning with an alert box.<br>The <b>onresize()</b> will resize the window, frame. For example: When the window is minimised, background color and text color will change after an alert box which functinality was manipulated through this function. And when user will refresh the page pop up will appear again.<br>The <b>onunload()</b> will be appear when leaving the current pagefor example clicking following link----<a href="https://www.w3schools.com/jsref/event_onunload.asp" id="unloadLink">Click Me Before Leaving</a>
+<p id="resize"></p>
+
+<h2> Form Event!!</h2>
+The <b>onFocus()</b> event occurs when the input field gets focus. When the input field is focused, the border of it gets darker.<br>
+The <b>onBlur()</b> event occurs when the input field loses focus. When the input field is not focused, the border gets little light weighted here.<br>
+The <b>onSelect()</b> event occurs when the user selects some text within an input field.<br>
+The <b>onSubmit()</b> event occurs when the form is submitted.<br>
+The <b>onreset()</b> event occurs when the form is reset.<br><br>Combining all these following form demo was created.<br><br>
+<form id="myForm" onsubmit="return onSubmit();" onreset="onReset();">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" onblur="onBlur(event)" onfocus="onFocus(event)" onselect="onSelect(event)"><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" onblur="onBlur(event)" onfocus="onFocus(event)" onselect="onSelect(event)"><br><br>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+  </form>
+  
+
+<script>
+function mouseDown() {
+  document.getElementById("myP").style.color = "blue";
+}
+
+function enter(){
+    document.getElementById("myP").style="cursor:pointer";
+}
+function leave(){
+    document.getElementById("myP").style="cursor:default";
+}
+function mouseUp() {
+  document.getElementById("myP").style.color = "red";
+}
+function move(event) {
+  var x = event.clientX;
+  var p = document.getElementById("myP");
+  var width = window.innerWidth;
+  var newSize = Math.abs((x / width) * 50) + 10; // Adjust sensitivity and minimum size as needed
+  p.style.fontSize = newSize + "px";
+
+  var size = document.getElementById("demo");
+  size.style.display = "inline"; // Display text size when mouse moves
+  size.textContent = "Text Size: " + newSize + " px"; // Display text size
+}
+function double() {
+document.getElementById("myP").innerHTML += "Wooohhooo explore more! ";
+}
+function myFunction() {
+  document.getElementById("demo").innerHTML = "You pressed a key inside the input field";
+}
+function myFunction1() {
+  alert("You pressed a key inside the input field");
+}
+function myFunction2() {
+  let x = document.getElementById("fname");
+  x.value = x.value.toLowerCase();
+}
+
+function myFunction3() {
+  alert("Loaded successfully!");
+}
+document.getElementById('unloadLink').addEventListener('click', function(event) {
+   
+    alert('UnloadLink Clicked! leaving the page');
+});
+window.addEventListener('beforeunload', function(event) {
+ 
+    event.returnValue = 'Are you sure you want to leave?';
+});
+
+function onresize(){
+    document.getElementById("demo1").style.background="purple";
+    document.getElementById("demo1").style.color="white";
+    alert("Window is resizing!");
+}
+function myFunction4() {
+    var element=document.getElementById("demo2");
+    element.innerHTML = "You scrolled in div.";
+    element.style.color = "red";
+  
+}
+
+function onBlur(event) {
+    console.log('Blur event on: ' + event.target.id);
+  }
+
+  function onFocus(event) {
+    console.log('Focus event on: ' + event.target.id);
+  }
+
+  function onSelect(event) {
+    console.log('Select event on: ' + event.target.id);
+  }
+
+  function onSubmit() {
+    console.log('Form submitted');
+    alert('Successfully submitted');
+    return true; // Returning true allows the form to be submitted, false prevents submission
+  }
+
+  function onReset() {
+    console.log('Form reset');
+    // You can perform additional actions here after resetting the form
+  }
+
+</script>
+
+</body>
+</html>
